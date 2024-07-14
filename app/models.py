@@ -13,4 +13,4 @@ class TextModel(models.Model):
         send_mail(subject, message, None, recipient_list)
 
         print("done")
-        super().save(*args, **kwargs)
+        #super().save(*args, **kwargs)
