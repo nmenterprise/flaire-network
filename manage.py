@@ -6,7 +6,7 @@ import sys
 
 def main():
     """Run administrative tasks."""
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'flairecb.settings')
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'flare-network.settings')
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:

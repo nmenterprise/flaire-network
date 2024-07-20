@@ -2,7 +2,7 @@
     "version": 2,
     "builds": [
       {
-        "src": "flairecb/wsgi.py",
+        "src": "flare-network/wsgi.py",
         "use": "@vercel/python",
         "config": { "maxLambdaSize": "15mb", "runtime": "python3.11" }
       },
@@ -21,7 +21,7 @@
       },
       {
         "src": "/(.*)",
-        "dest": "flairecb/wsgi.py"
+        "dest": "flare-network/wsgi.py"
       }
     ],
     "outputDirectory": "staticfiles"
