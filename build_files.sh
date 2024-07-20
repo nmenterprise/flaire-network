@@ -3,5 +3,6 @@ pip3 install whitenoise
 pip3 install channels
 pip3 install daphne
 pip3 install python-decouple
+ip3 install psycopg2
 echo "gotten alembic"
 python3 manage.py collectstatic --noinput
