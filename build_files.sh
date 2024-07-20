@@ -1,3 +1,4 @@
+pip3 install channels
 pip3 install alembic
 pip3 install binwalk
 echo "gotten alembic"
