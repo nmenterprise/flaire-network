@@ -1,4 +1,4 @@
-django>=3.0,<4.0
+pip3 install django>=3.0,<4.0
 pip3 install whitenoise
 pip3 install channels
 pip3 install daphne
