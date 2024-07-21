@@ -16,10 +16,6 @@
   ],
   "routes": [
     {
-      "src": "/ws/(.*)",
-      "dest": "flare-network/asgi.py"
-    },
-    {
       "src": "/(.*)",
       "dest": "flare-network/wsgi.py"
     }
