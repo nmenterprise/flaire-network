@@ -21,7 +21,7 @@
     },
     {
       "src": "/ws/(.*)",
-      "dest": "flare-network/asgi.py"  // Point to ASGI application for WebSocket connections
+      "dest": "flare-network/asgi.py"
     }
   ],
   "outputDirectory": "staticfiles/"
