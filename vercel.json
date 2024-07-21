@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "flare-network/wsgi.py",
+      "src": "flare-network/asgi.py",
       "use": "@vercel/python",
       "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
     },
@@ -16,12 +16,12 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "flare-network/wsgi.py"
-    },
-    {
       "src": "/ws/(.*)",
       "dest": "flare-network/asgi.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "flare-network/wsgi.py"
     }
   ],
   "outputDirectory": "staticfiles/"
