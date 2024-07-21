@@ -8,3 +8,6 @@ echo "gotten alembic"
 python3 manage.py collectstatic --noinput
 python3 manage.py makemigrations
 python3 manage.py migrate
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('Mr-Ken', 'admin@gmail.com', 'NOvendd7.com')" | python3 manage.py shell
+
+echo "Build process completed successfully."
