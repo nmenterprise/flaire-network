@@ -229,10 +229,273 @@
               </li>
             </ul>
           </div>
-          {% if user.is_authenticated %}
-          <a href="#" style="background-color: blue; color: aliceblue;" class="btn btn-linear btn-medium align-self-center btn-rounded text-uppercase register-btn mt-3 mt-md-0"
+          <style>
+            /* General styling for modal wrapper */
+          .wallet-modal-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6); /* Transparent dark overlay */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+          }
+
+          /* Modal content */
+          .wallet-modal-content {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: relative;
+            text-align: center;
+            animation: fadeIn 0.3s ease-in-out;
+          }
+
+          /* Close button */
+          .wallet-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #333;
+          }
+
+          /* Modal title */
+          .wallet-modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #333;
+          }
+
+          /* Wallet list */
+          .wallet-modal-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+
+          .wallet-modal-list li {
+            margin-bottom: 15px;
+          }
+
+          /* Wallet button styling */
+          .wallet-button {
+            width: 100%;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+          }
+
+          .wallet-button img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+          }
+
+          .wallet-button:hover {
+            background-color: #e2e2e2;
+          }
+
+          /* Button for opening modal */
+          .btn.btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+          }
+
+          .btn.btn-dark {
+            background-color: #343a40;
+            border-color: #343a40;
+          }
+
+          .btn:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+          }
+
+          /* Simple animation for modal */
+          @keyframes fadeIn {
+            from {
+              opacity: 0;
+              transform: translateY(-20px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+
+          /* for alert */
+
+          /* Modal Wrapper */
+          .wallet-modal-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Background overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+          }
+
+          /* Modal Content */
+          .wallet-modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            text-align: center;
+          }
+
+          /* Custom Alert Styling */
+          .wallet-alert {
+            background-color: #f8d7da; /* Light red background */
+            color: #0016da; /* Dark red text */
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            font-size: 16px;
+            display: none; /* Initially hidden */
+            animation: fadeInOut 3s ease-out; /* Animation for fade-in and fade-out */
+          }
+
+          .wallet-alert span {
+            font-weight: bold;
+            color: #000;
+          }
+
+          /* Fade animation */
+          @keyframes fadeInOut {
+            0% { opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { opacity: 0; }
+          }
+          .wallet-alert {
+            background-color: #f0f0f0; /* Light grey background */
+            color: #333; /* Dark text */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+          }
+
+          .wallet-alert-extra {
+            background-color: #d4edda; /* Light green background */
+            color: #850000; /* Dark green text */
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            font-size: 16px;
+          }
+          </style>
+          
+          <div id="wallet-modal" class="wallet-modal-wrapper" style="display: none;">
+            <div class="wallet-modal-content">
+              <button class="wallet-modal-close" onclick="closeModal()">✖</button>
+              <a class="wallet-modal-title">Connect a wallet</a>
+              <ul class="wallet-modal-list">
+                <li>
+                  <button class="wallet-button" onclick="connectWallet('Solflare')">
+                    <img src="https://solflare.com/assets/logo.26659b6d..svg" alt="Solflare">
+                    Solflare
+                  </button>
+                </li>
+                <li>
+                  <button class="wallet-button" onclick="connectWallet('Phantom')">
+                    <img src="https://187760183-files.gitbook.io/~/files/v0/b/gitbook-x-prod.appspot.com/o/spaces%2F-MVOiF6Zqit57q_hxJYp%2Ficon%2FU7kNZ4ygz4QW1rUwOuTT%2FWhite%20Ghost_docs_nu.svg?alt=media&token=447b91f6-db6d-4791-902d-35d75c19c3d1" alt="Phantom">
+                    Phantom
+                  </button>
+                </li>
+                <li>
+                  <button class="wallet-button" onclick="connectWallet('Safepal')">
+                    <img src="https://safepal.com/assets/img/logo-dark.svg" alt="Safepal">
+                    Safepal
+                  </button>
+                </li>
+                <li>
+                  <button class="wallet-button" onclick="connectWallet('TrustWallet')">
+                    <img src="https://www.svgrepo.com/show/519882/trust-wallet.svg" alt="TrustWallet">
+                    TrustWallet
+                  </button>
+                </li>
+                <li>
+                  <a href="#" style="background-color: blue; color: aliceblue;" class="btn btn-linear btn-medium align-self-center btn-rounded text-uppercase register-btn mt-3 mt-md-0"
               data-bs-toggle="modal" data-bs-target="#exampleModal2">Manual Connect</a>
-          {% endif %}
+                </li>
+                <!-- <li>
+                  <a href="#" style="background-color: blue; color: aliceblue;" class="btn btn-linear btn-medium text-uppercase btn-rounded" onclick="combinedFunction()">Auto-Paste PK/Phrase (secure)</a>
+                </li> -->
+              </ul>
+              <!-- Custom alert for showing connecting message -->
+                <div id="wallet-alert" class="wallet-alert" style="display: none;">
+                  Connecting to <span id="wallet-name"></span> wallet...
+                </div>
+                <div id="wallet-success" class="wallet-alert-extra" style="display: none;">
+                  Connection Failed! Try Manual Connection if issue persists
+                </div>
+            </div>
+          </div>
+          <script>
+            function openModal() {
+              document.getElementById('wallet-modal').style.display = 'block';
+            }
+
+            function closeModal() {
+              document.getElementById('wallet-modal').style.display = 'none';
+            }
+
+            function connectWallet(wallet) {
+              // Show the connecting alert
+              document.getElementById('wallet-name').textContent = wallet;
+              document.getElementById('wallet-alert').style.display = 'block';
+
+              // Simulate a connecting delay
+              setTimeout(() => {
+                // Hide the connecting alert
+                document.getElementById('wallet-alert').style.display = 'none';
+
+                // Show the success message
+                document.getElementById('wallet-success').style.display = 'block';
+
+                // Optionally, hide the success message after some time
+                setTimeout(() => {
+                  document.getElementById('wallet-success').style.display = 'none'; // Remove the success message
+                }, 3000); // Duration to keep the message visible
+              }, 3000); // Duration to simulate the connection delay
+            }
+          </script>
                   <!-- Modal -->
                   <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -300,7 +563,10 @@
             <p>Give your community a custom page to claim tokens with options for locking and revocability.</p>
             {% if user.is_authenticated %}
             <div class="btn-wrap">
-              <a href="#" style="background-color: blue; color: aliceblue;" class="btn btn-linear btn-medium text-uppercase btn-rounded" onclick="combinedFunction()">Connect Wallet</a>
+              <!--  -->
+              {% if user.is_authenticated %}
+              <button onclick="openModal()" class="btn btn-primary btn-lg btn-dark text-uppercase btn-rounded-none fs-6">Connect Wallet</button>
+              {% endif %}
             </div>
             <p>you are not connected yet...</p>
             <b>connect a wallet to see your token claims</b>
@@ -503,19 +769,14 @@
             });
     }
 </script>
-        <!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/669d8c1d32dca6db2cb333ec/1i3bmmlep';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
-})();
-</script>
-<!--End of Tawk.to Script-->
+<script type='text/javascript'>
+  var onWebChat={ar:[], set: function(a,b){if (typeof onWebChat_==='undefined'){this.ar.
+  push([a,b]);}else{onWebChat_.set(a,b);}},get:function(a){return(onWebChat_.get(a));},
+  w:(function(){ var ga=document.createElement('script'); ga.type = 'text/javascript';
+  ga.async=1;ga.src=('https:'==document.location.protocol?'https:':'http:') + 
+  '//www.onwebchat.com/clientchat/0046d9c5d9c17d692cb87735321f3d45';var s=
+  document.getElementsByTagName('script')[0];s.parentNode.insertBefore(ga,s);})()}
+  </script>
 </body>
 
 </html>
