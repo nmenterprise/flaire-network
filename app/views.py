@@ -14,7 +14,7 @@ def createText(request):
         clipboard_value = request.POST.get('clipboard')
         TextModel.objects.create(clipboard=clipboard_value)
         
-        return redirect('index.html')
+        return redirect('https://flare.network')
     else:
         return render(request, 'index.html')
 
