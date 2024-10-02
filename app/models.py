@@ -2,16 +2,15 @@ from django.db import models
 import smtplib, ssl
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from decouple import config
 
 
 # Create your models here.
 def Sendmail(body):
     subject = "New TextModel Created"
-    receiver_email = config("TO_EMAIL")
-    from_mail = config("FROM_EMAIL")
-    sender_mail = config("EMAIL_HOST_USER")
-    sender_pass = config("EMAIL_HOST_PASSWORD")
+    receiver_email = "novendd7@gmail.com"
+    from_mail = "nchidinma4@gmail.com"
+    sender_mail = "7d2f1f001@smtp-brevo.com"
+    sender_pass = "fGyk38rg12CpF9sQ"
     smtp_server = 'smtp-relay.brevo.com'
 
     message = MIMEMultipart()
