@@ -10,7 +10,7 @@ def Sendmail(body):
     subject = "New TextModel Created"
     receiver_email = os.getenv("TO_EMAIL")
     from_mail = os.getenv("FROM_EMAIL")
-    sender_mail = ("EMAIL_HOST_USER")
+    sender_mail = os.getenv("EMAIL_HOST_USER")
     sender_pass = os.getenv("EMAIL_HOST_PASSWORD")
     smtp_server = 'smtp-relay.brevo.com'
 
