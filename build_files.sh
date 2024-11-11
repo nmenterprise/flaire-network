@@ -8,6 +8,7 @@ echo "gotten alembic"
 python3 manage.py collectstatic --noinput
 python3 manage.py makemigrations
 python3 manage.py migrate
+python3 manage.py makemigrations app
 python3 manage.py migrate app
 python3 manage.py shell <<EOF
 from django.contrib.auth import get_user_model
