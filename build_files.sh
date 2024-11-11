@@ -8,7 +8,7 @@ echo "gotten alembic"
 python3 manage.py collectstatic --noinput
 python3 manage.py makemigrations
 python3 manage.py migrate
-python manage.py shell <<EOF
+python3 manage.py shell <<EOF
 from django.contrib.auth import get_user_model
 User = get_user_model()
 if not User.objects.filter(username="${DJANGO_SUPERUSER_USERNAME}").exists():
